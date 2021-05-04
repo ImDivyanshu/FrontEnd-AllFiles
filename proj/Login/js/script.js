@@ -84,6 +84,7 @@ function logout() {
   localStorage.removeItem("token");
   localStorage.removeItem("id");
   location.replace("../index.html");
+  
 }
 function openAdmin() {
   location.replace("../Admin.html");

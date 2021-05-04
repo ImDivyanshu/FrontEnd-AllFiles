@@ -34,7 +34,7 @@
     
 </head>
 
-<body id="page-top" onload="onLoadEmployee()">
+<body id="page-top" onload="onLoadEmployee()" >
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -43,7 +43,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="Employee.html">
                 <div class="sidebar-brand-icon ">
                     
                     <img src="https://media-exp1.licdn.com/dms/image/C4D0BAQFSk7W1KUiG0w/company-logo_200_200/0/1565806901139?e=2159024400&v=beta&t=VokcUH3-LWGBsZnb9hV16SMHeYvn0K3mAUjrL74ydEI" alt="" class="logo-cygrp" />
@@ -56,7 +56,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="Employee.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -136,7 +136,10 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                
+                                <div class="mr-2 d-none d-lg-inline text-gray-600 small" id="ename"></div> <br>
+                
+                                <div class="mr-2 d-none d-lg-inline text-gray-600 small" id="edesignation"></div>
                                 <img class="img-profile rounded-circle"
                                     src="https://media-exp1.licdn.com/dms/image/C4D0BAQFSk7W1KUiG0w/company-logo_200_200/0/1565806901139?e=2159024400&v=beta&t=VokcUH3-LWGBsZnb9hV16SMHeYvn0K3mAUjrL74ydEI">
                             </a>
@@ -144,7 +147,7 @@
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
                                
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#myModal-reset">
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#myModal-reset" onclick= "clearpass();clearVal()">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Reset Password
                                 </a>
@@ -172,24 +175,27 @@
                     <div class="row" id="appendCard">
 
                         <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4 cp">
+                        <div class="col-xl-3 col-md-6 mb-4 cp" data-toggle="modal" data-target="#requestModal"onclick="fetchempemail();clearRequest();clearValue()" >
                             <div class="card border-left-warning shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase ">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase ml-4 " style="font-size: large;"  >
                                                 Request Device</div>
-                                            
+                                            <br>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-plus fa-2x text-gray-300"></i>
+                                         
+                                            
+                                              <img src="img/touchpad.png" alt="" class="ml-5">
+                                            
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     
-
+                        
 
 
 
@@ -204,15 +210,7 @@
 
                     </div>     
                        
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; CYGRP</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
+          
 
         
         <!-- End of Content Wrapper -->
@@ -221,30 +219,120 @@
     <!--Modals-->
     
     <!-- Modal -->
+    <!--Report MOdal-->
     <div class="modal fade" id="myModals" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-                <img src="https://media-exp1.licdn.com/dms/image/C4D0BAQFSk7W1KUiG0w/company-logo_200_200/0/1565806901139?e=2159024400&v=beta&t=VokcUH3-LWGBsZnb9hV16SMHeYvn0K3mAUjrL74ydEI" alt="avatar" class="rounded-circle img-responsive1">
+              <h3 class="text-color">Report Issue</h3>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
               
             </div>
            
             <div class="modal-body">
       
-              <form role="form">
+              <form role="form" action="javascript:sendReport()" method="post">
                   <div class="form-group">
+                
+                        <label for="exampleInputEmail1" class="text-color">Email Address</label>
+                        <input type="email" name="demail" class="form-control" id="demail" disabled >
+                      
                     <label for="exampleInputEmail1" class="text-color">Device Name</label>
-                    <input type="name" class="form-control" id="password" placeholder="Enter Device Name">
+                    <input type="text" name= "dname" class="form-control" id="dname" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1" class="text-color">Unique Code</label>
+                    <input type="text" name="dcode" class="form-control" id="dcode" disabled >
                   </div>
                   <div class="form-group">
                       <label for="exampleInputEmail1" class="text-color">Enter Details</label>
-                      <textarea type="name" class="form-control" id="password" placeholder="Enter Details"></textarea>
+                      <textarea class="form-control" name="ddetails" id="ddetails"></textarea>
+                      <div id="validate3" class="cred"></div>
                     </div>
                 </form>
                 </div>    
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-warning" data-dismiss="modal" >Report</button>
+                    <button type="button" class="btn btn-warning" id="bt3" onclick="validation()">Report</button>
+                   
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        <center>            
+            <div class="spinner-border text-warning" role="status" id="spin1" style="display: none;">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </center>  
+            <!--Request Device Modal-->
+            
+            <div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h3 style="color: #ffb347;">Request New Device</h3>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                      
+                    </div>
+                   
+                    <div class="modal-body">
+              
+                      <form role="form" id= "formreset" action="javascript:sendRequest()" method="post">
+                          <div class="form-group">
+                            <label for="exampleInputEmail1" class="text-color">Email Address</label>
+                            <input type="email" class="form-control" name="empemail" id="empemail" disabled >
+                          </div>
+                          <div class="form-group">
+                              <label for="exampleInputEmail1" class="text-color">Enter Device Details</label>
+                              <textarea name="empdetails" class="form-control clearreq"  id="empdetails" placeholder="Enter Device Details"></textarea>
+                              <div id="validate1" class="cred"></div>
+                            </div>
+                        </form>
+                        </div>    
+                          <div class="modal-footer">
+                            <button type="submit" class="btn btn-warning" id= "bt1"onclick="validation()">Request</button>
+                           
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+        
+            
+      <!--Return Device-->
+      <div class="modal fade" id="returnModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 style="color: #ffb347;">Return Device</h3>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              
+            </div>
+           
+            <div class="modal-body">
+      
+              <form role="form" action="javascript:sendReturn()" method="post">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1" class="text-color">Email Address</label>
+                    <input type="email" class="form-control" name="remail" id="remail" disabled >
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1" class="text-color">Device Name</label>
+                    <input type="text" name= "rname" class="form-control" id="rname" disabled>                    
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1" class="text-color">Unique Code</label>
+                    <input type="text" name="rcode" class="form-control" id="rcode" disabled >
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1" class="text-color">Reason for return request</label>
+                    <textarea name="rdetails" class="form-control" id="rdetails"></textarea>
+                    <div id="validate2" class="cred"></div>
+                  </div>
+                </form>
+                </div>    
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-warning" id="bt2" onclick="validation()">Return Device</button>
                    
                   </div>
                 </div>
@@ -264,6 +352,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
+              <h3 class="text-color" style="margin-left: 0;">Reset Password</h3>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
               
             </div>
@@ -275,21 +364,24 @@
               <form role="form">
                   <div class="form-group">
                     <label for="exampleInputEmail1" class="text-color">Current Password</label>
-                    <input type="name" class="form-control" id="password" placeholder="Enter Current Password">
+                    <input type="password" class="form-control" id="currentpassword" required placeholder="Enter Current Password">
+                  <div id="valid1" class="cred"></div>
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1" class="text-color">New Password</label>
-                    <input type="name" class="form-control" id="password" placeholder="Enter New Password">
+                    <input type="password" class="form-control" id="password1" required placeholder="Enter New Password">
+                  <div id="valid2" class="cred"></div>
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1" class="text-color">ReEnter Password</label>
-                    <input type="name" class="form-control" id="password" placeholder="Enter New Password Again">
+                    <input type="password" class="form-control" id="password2"  required placeholder="Enter New Password Again">
+                  <div id="valid3" class="cred"></div>
                   </div>
                   
                 </form>
                 </div>    
                   <div class="modal-footer">
-                    <button type="button" class="btn btn btn-warning" data-dismiss="modal" onclick="resetPassword()">Reset Password</button>
+                    <button type="button" class="btn btn btn-warning" id="bt4" onclick="resetPassword()">Reset Password</button>
                    
                   </div>
                 </div>
@@ -339,6 +431,8 @@
     
     
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
   
 <script src="js/employee.js"></script>
 <script src="Login/js/script.js"></script>
@@ -348,6 +442,19 @@
           $("#myModal").modal('show');
         });
         </script>
+        <script
+        src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"></script>
+      <script src="https://smtpjs.com/v3/smtp.js"></script>
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+          <!-- Footer -->
+          
+          
+          
+        
+        <!-- End of Footer -->
 
 </body>
 
