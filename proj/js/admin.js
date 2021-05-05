@@ -547,6 +547,7 @@ function deallocate(deviceDeallocateId){
 
 }
 
+
 function fetchAllocatedCategory() {
   document.getElementById("spin2").style.display="block";
   fetch(`https://localhost:44327/api/deviceInfo/categoryList`, {
@@ -566,7 +567,7 @@ function fetchAllocatedCategory() {
     .then((data) => {
       document.getElementById("spin2").style.display="none";
         console.log(data);
-      let li = `<div class="col-xl-3 col-md-6 mb-4 cp" id="addCategory" data-toggle="modal" data-target="#myModalAddDevice" onclick="clearCategory();clearVal();"> 
+      let li = ` <div class="col-xl-3 col-md-6 mb-4 cp" id="addCategory" data-toggle="modal" data-target="#myModalAddDevice" onclick="clearCategory();clearVal();"> 
       <div class="card border-left-warning shadow h-100 py-2">
           <div class="card-body">
               <div class="row no-gutters align-items-center">
@@ -604,7 +605,7 @@ function fetchAllocatedCategory() {
       </div>
       `;
       });
-      document.getElementById("appendList").innerHTML = li;
+      document.getElementById("appendCard").innerHTML = li;
 
       // do something with data
       console.log(data);
@@ -613,7 +614,6 @@ function fetchAllocatedCategory() {
       console.log("Looks like there was a problem: \n", error);
     });
 }
-
 
 
 
