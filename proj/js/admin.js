@@ -143,7 +143,7 @@ function fetchAllocated(){
               <th scope="col">Assigned To</th>
               <th scope="col">Assigned Date</th>
               <th scope="col">Assigned By</th>
-              <th scope="col">Action</th>
+              <th scope="col">Action(s)</th>
             </tr>
           </thead>
         `;
@@ -151,8 +151,8 @@ function fetchAllocated(){
           // console.log(user);
           document.getElementById("spin2").style.display="none";
                   var uq ="\'"+ TempUser.uniqueCode.toString() + "\'"; 
-                   
-console.log(uq);
+                  var qr ="\'"+ TempUser.qrCode+ "\'"; 
+console.log(qr);
           li += `  <tr>
           <td data-label="Device Name">${TempUser.deviceName}</td>
           <td data-label="Unique Code">${TempUser.uniqueCode}</td>
@@ -166,7 +166,7 @@ console.log(uq);
       <button href="#" class="btn btn-warning btn-circle btn-sm" data-toggle="modal" data-target="#auditTrailModal" onclick="auditTrail(${uq})">
           <i class="fas fa-history"></i>
       </button>
-      <button href="#" class="btn btn-info btn-circle btn-sm">
+      <button href="#" class="btn btn-info btn-circle btn-sm" data-toggle="modal" data-target="#myModalQR" onclick="showQR(${qr})">
           <i class="fas fa-qrcode"></i>
       </button>
           </td>
@@ -566,7 +566,7 @@ function fetchAllocatedCategory() {
     .then((data) => {
       document.getElementById("spin2").style.display="none";
         console.log(data);
-      let li = ` <div class="col-xl-3 col-md-6 mb-4 cp" id="addCategory" data-toggle="modal" data-target="#myModalAddDevice" onclick="clearCategory();clearVal();"> 
+      let li = `<div class="col-xl-3 col-md-6 mb-4 cp" id="addCategory" data-toggle="modal" data-target="#myModalAddDevice" onclick="clearCategory();clearVal();"> 
       <div class="card border-left-warning shadow h-100 py-2">
           <div class="card-body">
               <div class="row no-gutters align-items-center">
@@ -604,7 +604,7 @@ function fetchAllocatedCategory() {
       </div>
       `;
       });
-      document.getElementById("appendCard").innerHTML = li;
+      document.getElementById("appendList").innerHTML = li;
 
       // do something with data
       console.log(data);
@@ -799,4 +799,8 @@ function deleteCategorySwal(deleteId) {
       swal("Your Device category is safe!");
     }
   });
+}
+
+function showQR(deviceQR) {
+  document.getElementById("myQRimg").src = deviceQR;
 }

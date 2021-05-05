@@ -346,3 +346,91 @@ function validation6() {
 
   
   /*End Of Modal Cleaner Functions */
+
+
+
+  function resetPasswordEmployee() {
+    
+    var currentpassword = document.getElementById("currentpassword").value;
+    var password1 = document.getElementById("password1").value;
+    var password2 = document.getElementById("password2").value;
+ 
+  if (currentpassword== ""){
+  document.getElementById("valid1").innerHTML="This is required";
+  }
+  if (password1 == ""){
+  document.getElementById("valid2").innerHTML="This is required";
+  }
+  if (password2== ""){
+  document.getElementById("valid3").innerHTML="This is required";
+  }
+  if (currentpassword !="" && password1 !="" && password2 !=""){
+  if (password1.length < 6){
+    document.getElementById("valid2").innerHTML="Password should be atleast 6 characters long";
+    return;
+  }
+  else if (password1 != password2){
+  swal("Passwords didn't match");
+  return;
+  }
+  
+  
+    
+  var loginInfo = {
+  CurrentPassword: CryptoJS.MD5(currentpassword.toString()).toString(),
+  NewPassword: CryptoJS.MD5(password1.toString()).toString(),
+  
+  };
+  
+  console.log(loginInfo);
+  var urlUpdate = "https://localhost:44327/api/Login/resetPassword/" + window.localStorage.getItem("id").toString();
+  console.log(urlUpdate);
+  fetch(urlUpdate, {
+  method: "PUT",
+  mode: "cors", // no-cors, *cors, same-origin
+  cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+  credentials: "same-origin", // include, *same-origin, omit
+  headers: {
+    "Content-Type": "application/json",
+    Authorization:
+      "Bearer " + window.localStorage.getItem("token").toString(),
+    // 'Content-Type': 'application/x-www-form-urlencoded',
+  },
+  redirect: "follow", // manual, *follow, error
+  referrerPolicy: "no-referrer",
+  body: JSON.stringify(loginInfo),
+  })
+  //.then(response => response.json())
+  .then((res) => res.json())
+  .then((data) => {
+  // console.log(data)
+  if (data == 1){
+  swal({
+    title: "Success",
+    text: "Password Updated Successfully!",
+    icon: "success",
+  });
+  
+  }
+  else {
+  swal({
+    title: "Oops",
+    text: "You Entered Wrong Password!",
+    icon: "error",
+  });
+  }
+  
+  });
+  document.getElementById("bt4").setAttribute("data-dismiss","modal");
+  } 
+  }
+
+  function clearValue2(){
+    document.getElementById("valid1").innerHTML = "";
+    document.getElementById("valid2").innerHTML = "";
+    document.getElementById("valid3").innerHTML = "";
+    document.getElementById("currentpassword").value = "";
+    document.getElementById("password1").value = "";
+    document.getElementById("password2").value = "";
+  }
+ 

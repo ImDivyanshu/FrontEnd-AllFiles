@@ -59,11 +59,21 @@ function fetchDevicesData() {
 }
 
 function onLoadEmployee(){
-    // console.log("What is Life?");
+  CheckLoginEmp();
     id = window.localStorage.getItem("id").toString();
     fetchDevicesData();
     fetchEmployeeInfo();
 }
+ 
+ 
+ function CheckLoginEmp(){
+   if(localStorage.getItem("token")==null)
+   {
+     
+       window.open("index.html", "_blank");
+     
+   }
+ }
 
 function fetchEmployeeInfo(){
   fetch(`https://localhost:44327/api/employee/profile/${id}`,{
@@ -271,3 +281,6 @@ function fetchempemail(){
    document.getElementById("validate2").innerHTML = "";
    document.getElementById("validate3").innerHTML = "";
  }
+
+
+ 
